@@ -1,6 +1,6 @@
 {
   "name": "nestjs-custom-validators",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This package contains a few custom validator I have found to be repetitive, So I made templates that handles both class-validator checks and Swagger configuration",
   "main": "lib/index.js",
   "scripts": {

@@ -1,8 +1,8 @@
 {
-  "name": "nestjs-customvalidators",
+  "name": "nestjs-custom-validators",
   "version": "1.0.0",
   "description": "This package contains a few custom validator I have found to be repetitive, So I made templates that handles both class-validator checks and Swagger configuration",
-  "main": "./lib/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

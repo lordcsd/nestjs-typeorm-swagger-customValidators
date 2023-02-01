@@ -1,0 +1,38 @@
+{
+  "name": "nestjs-customvalidators",
+  "version": "1.0.0",
+  "description": "This package contains a few custom validator I have found to be repetitive, So I made templates that handles both class-validator checks and Swagger configuration",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lordcsd/nestjs-typeorm-swagger-customValidators.git"
+  },
+  "keywords": [
+    "Nestjs",
+    "Validation",
+    "Documentation",
+    "class-validator",
+    "swagger",
+    "decorators",
+    "typescript",
+    "express"
+  ],
+  "author": "Chinonso Sunday Dimgba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lordcsd/nestjs-typeorm-swagger-customValidators/issues"
+  },
+  "homepage": "https://github.com/lordcsd/nestjs-typeorm-swagger-customValidators#readme",
+  "dependencies": {
+    "@nestjs/common": "^9.2.1",
+    "@nestjs/swagger": "^6.1.4",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0"
+  }
+}

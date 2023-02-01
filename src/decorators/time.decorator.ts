@@ -14,7 +14,7 @@ export function CustomTimeValidator(details: ICustomTimeValidatorOptions) {
   });
   return function (target: any, key: string) {
     optional ? IsOptional()(target, key) : notEmptyFn(key)(target, key);
-    Matches(new RegExp('([01]?[0-9]|2[0-3]):[0-5][0-9]'), {
+    Matches(new RegExp('(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]'), {
       message: `${key}: Must be a valid 24h time`,
       ...isArray && {each: true},
     })(target, key);

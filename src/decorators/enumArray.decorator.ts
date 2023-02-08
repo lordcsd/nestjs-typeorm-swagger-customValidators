@@ -31,7 +31,7 @@ export function CustomEnumJSONArrayValidator(
     Transform(TransformSingleItemToArray)(target, key);
     ArrayMinSize(1)(target, key);
     isArrayFn(key)(target, key);
-    isEnumFn(key, validEnum as object)(target, key);
+    isEnumFn(key, validEnum as any, true)(target, key);
     notEmptyFn(key)(target, key);
     Transform(TransformSortStringArray)(target, key);
     mySwaggerProp(target, key);

@@ -1,10 +1,10 @@
-import { IsOptional } from "class-validator";
-import { ICustomEnumValidatorOptions } from "../dto/customValidatorOptions.dto";
+import { IsOptional } from 'class-validator';
+import { ICustomEnumValidatorOptions } from '../dto/customValidatorOptions.dto';
 import {
   swaggerProp,
   notEmptyFn,
   isEnumFn,
-} from "../utils/commonDecoratorFunctions";
+} from '../utils/commonDecoratorFunctions';
 
 export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
   const { validEnum, optional, defaultValue, description, isArray } = details;
@@ -13,7 +13,9 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
     validEnum,
     optional,
     description,
-    defaultValue,
+    defaultValue: `${
+      optional ? 'optional enum, example:' : ''
+    } ${defaultValue}`,
     isArray,
   });
 

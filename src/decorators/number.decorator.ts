@@ -1,16 +1,16 @@
-import { Transform } from "class-transformer";
-import { IsOptional, Max, Min } from "class-validator";
+import { Transform } from 'class-transformer';
+import { IsOptional, Max, Min } from 'class-validator';
 import {
   TransformNumberStringToNumber,
   TransformSingleItemToArray,
-} from "../transformers/validatorTransformers";
+} from '../transformers/validatorTransformers';
 import {
   swaggerProp,
   notEmptyFn,
   isArrayFn,
   isNumberFn,
-} from "../utils/commonDecoratorFunctions";
-import { ICustomNumberValidationOptions } from "../dto/customValidatorOptions.dto";
+} from '../utils/commonDecoratorFunctions';
+import { ICustomNumberValidationOptions } from '../dto/customValidatorOptions.dto';
 
 function MinNumberFN(min: number, key: string, isArray: boolean = false) {
   return Min(min, {
@@ -36,12 +36,14 @@ function MaxNumberFN(max: number, key: string, isArray: boolean = false) {
 
 export function CustomNumberValidator(details: ICustomNumberValidationOptions) {
   const { optional, defaultValue, description, isArray, min, max } = details;
-  
+
   const mySwaggerProp = swaggerProp({
     optional,
     description,
-    defaultValue,
-    type: "number",
+    defaultValue: `${
+      optional ? 'optional number, example: ' : ''
+    } ${defaultValue}`,
+    type: 'number',
     isArray,
   });
 

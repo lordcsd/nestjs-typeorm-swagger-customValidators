@@ -1,15 +1,17 @@
 class IDefaultValdationOptions {
   optional? = false;
   defaultValue?: any;
-  description? = "";
+  description? = '';
 }
 
 class IBaseValidationOptions extends IDefaultValdationOptions {
   isArray? = false;
 }
 
+export class ICustomOnlyDateStringOptions extends IBaseValidationOptions {}
+
 export class ICustomSwaggerOptions extends IBaseValidationOptions {
-  type?: "boolean" | "number" | "string" | "array";
+  type?: 'boolean' | 'number' | 'string' | 'array';
   validEnum?: Object;
 }
 

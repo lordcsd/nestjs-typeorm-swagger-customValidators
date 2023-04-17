@@ -1,26 +1,23 @@
-import { Transform } from 'class-transformer';
-import { IsOptional } from 'class-validator';
-import { TransformBooleanStringToBoolean } from '../transformers/validatorTransformers';
-import { ICustomBooleanValidatorOptions } from '../dto/customValidatorOptions.dto';
+import { Transform } from "class-transformer";
+import { IsOptional } from "class-validator";
+import { TransformBooleanStringToBoolean } from "../transformers/validatorTransformers";
+import { ICustomBooleanValidatorOptions } from "../dto/customValidatorOptions.dto";
 import {
   isBooleanFn,
   notEmptyFn,
   swaggerProp,
-} from '../utils/commonDecoratorFunctions';
+} from "../utils/commonDecoratorFunctions";
 
 export function CustomBooleanValidator(
   details: ICustomBooleanValidatorOptions
 ) {
   const { optional, description, defaultValue } = details;
 
-  
   const mySwaggerProp = swaggerProp({
     optional,
     description,
-    defaultValue: `${optional ? 'optional boolean example: ' : ''}${
-      defaultValue || false
-    }`,
-    type: 'boolean',
+    defaultValue: defaultValue || false,
+    type: "boolean",
   });
 
   return function (target: any, key: string) {

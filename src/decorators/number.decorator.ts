@@ -40,9 +40,7 @@ export function CustomNumberValidator(details: ICustomNumberValidationOptions) {
   const mySwaggerProp = swaggerProp({
     optional,
     description,
-    defaultValue: `${
-      optional ? 'optional number, example: ' : ''
-    }${defaultValue}`,
+    defaultValue,
     type: 'number',
     isArray,
   });

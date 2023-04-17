@@ -42,7 +42,7 @@ export function CustomNumberValidator(details: ICustomNumberValidationOptions) {
     description,
     defaultValue: `${
       optional ? 'optional number, example: ' : ''
-    } ${defaultValue}`,
+    }${defaultValue}`,
     type: 'number',
     isArray,
   });

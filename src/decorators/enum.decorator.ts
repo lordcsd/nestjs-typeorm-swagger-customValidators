@@ -15,7 +15,7 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
     description,
     defaultValue: `${
       optional ? 'optional enum, example:' : ''
-    } ${defaultValue}`,
+    }${defaultValue}`,
     isArray,
   });
 

@@ -12,10 +12,12 @@ export function CustomBooleanValidator(
   details: ICustomBooleanValidatorOptions
 ) {
   const { optional, description, defaultValue } = details;
+
+  
   const mySwaggerProp = swaggerProp({
     optional,
     description,
-    defaultValue: `${optional ? 'optional boolean example: ' : ''} ${
+    defaultValue: `${optional ? 'optional boolean example: ' : ''}${
       defaultValue || false
     }`,
     type: 'boolean',

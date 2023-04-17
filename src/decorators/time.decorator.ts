@@ -10,7 +10,7 @@ export function CustomTimeValidator(details: ICustomTimeValidatorOptions) {
     description,
     defaultValue: `${
       optional ? 'optional time, example: ' : ''
-    } ${defaultValue}`,
+    }${defaultValue}`,
     type: isArray ? 'array' : 'string',
   });
   return function (target: any, key: string) {

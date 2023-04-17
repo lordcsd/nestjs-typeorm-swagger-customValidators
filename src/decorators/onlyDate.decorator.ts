@@ -33,7 +33,7 @@ export function CustomOnlyDateString(details: ICustomOnlyDateStringOptions) {
   const mySwaggerProp = swaggerProp({
     optional,
     description,
-    defaultValue: `${optional ? 'optional date string, example: ' : ''} ${
+    defaultValue: `${optional ? 'optional date string, example: ' : ''}${
       defaultValue || '2013-02-23'
     }`,
     type: 'string',

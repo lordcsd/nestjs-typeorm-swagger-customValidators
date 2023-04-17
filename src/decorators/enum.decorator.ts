@@ -20,14 +20,18 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
   return function (target: any, key: string) {
     if (!validEnum) {
       console.log(target);
-      throw new Error(`Please provide a validEnum for ${target.name}.${key}`);
+      throw new Error(
+        `Please provide a validEnum for ${target.constructor.name}}.${key}`
+      );
     }
 
     if (defaultValue && !Object.values(validEnum).includes(defaultValue)) {
       throw new Error(
         `Enum with keys ${Object.keys(
           validEnum
-        )} got invalid default value ${defaultValue} in ${target.name}`
+        )} got invalid default value ${defaultValue} in ${
+          target.constructor.name
+        }`
       );
     }
 

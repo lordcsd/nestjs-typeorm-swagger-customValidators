@@ -63,8 +63,13 @@ export const isArrayFn = (customKey: string) =>
   IsArray({ message: `${customKey}: Must be array` });
 
 export const swaggerProp = (details: ICustomSwaggerOptions) => {
-  const { defaultValue, description, validEnum, optional, isArray, type } =
-    details;
+  const { description, validEnum, optional, isArray, type } = details;
+
+  let defaultValue = details.defaultValue;
+
+  if(typeof defaultValue == 'string'){
+    defaultValue = defaultValue.trim()
+  }
 
   const types = {
     boolean: Boolean,

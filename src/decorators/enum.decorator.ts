@@ -13,7 +13,7 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
     validEnum,
     optional,
     description,
-    defaultValue: defaultValue || defaultValue[Object.values(validEnum)[0]],
+    defaultValue,
     isArray,
   });
 
@@ -22,7 +22,7 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
       throw new Error(`Please provide a validEnum for ${target}.${key}`);
     }
 
-    if (!validEnum[defaultValue]) {
+    if (defaultValue && !validEnum[defaultValue]) {
       throw new Error(
         `Please provide valid default value for  ${target}.${key}`
       );

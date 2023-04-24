@@ -1,25 +1,25 @@
-import { UnprocessableEntityException } from '@nestjs/common';
+import { UnprocessableEntityException } from "@nestjs/common";
 
 export const TransformBooleanStringToBoolean = ({ value }) => {
-  if (typeof value === 'boolean') {
+  if (typeof value === "boolean") {
     return value;
   }
-  if (value && typeof value == 'string') {
-    if (value.trim().toLocaleLowerCase() === 'true') {
+  if (value && typeof value == "string") {
+    if (value.trim().toLocaleLowerCase() === "true") {
       return true;
-    } else if (value.trim().toLocaleLowerCase() === 'false') {
+    } else if (value.trim().toLocaleLowerCase() === "false") {
       return false;
     }
   }
-  return '';
+  return "";
 };
 
 export const TransformNumberStringToNumber = ({ value }) => {
   if (Array.isArray(value)) {
     return value.map((_value) =>
-      typeof _value == 'string' ? Number(_value) : _value,
+      typeof _value == "string" ? Number(_value) : _value
     );
-  } else if (!Array.isArray(value) && typeof value === 'string') {
+  } else if (!Array.isArray(value) && typeof value === "string") {
     return Number(value);
   }
   return value;
@@ -38,8 +38,8 @@ export const TransformStringToJSONArray = ({ value, key }) => {
     if (Array.isArray(value)) {
       return value;
     }
-    if (typeof value === 'string') {
-      const splitAsString = value.split(',');
+    if (typeof value === "string") {
+      const splitAsString = value.split(",");
 
       const isJSONArrayString = value.constructor === [].constructor;
 
@@ -56,16 +56,29 @@ export const TransformStringToJSONArray = ({ value, key }) => {
       }
     }
 
-    throw new Error('validation failed');
+    throw new Error("validation failed");
   } catch (err) {
     throw new UnprocessableEntityException(
-      `${key}: Must be an array, JSON array or comma separated string`,
+      `${key}: Must be an array, JSON array or comma separated string`
     );
   }
 };
 
-export const TransformSortStringArray = ({ value }) =>
-  value.sort((a, b) => a.localeCompare(b));
+export const TransformSortStringArray = ({ value }) => {
+  console.log(
+    "value from transformSort: ",
+    value,
+    " \n returns:",
+    Array.isArray(value) && value.length
+      ? value.sort((a, b) => a.localeCompare(b))
+      : value
+  );
+  return Array.isArray(value) && value.length
+    ? value.sort((a, b) => a.localeCompare(b))
+    : value;
+};
 
-export const TransformSingleItemToArray = ({ value }) =>
-  Array.isArray(value) ? value : [value];
+export const TransformSingleItemToArray = ({ value }) => {
+  console.log({ value });
+  return Array.isArray(value) ? value : [value];
+};

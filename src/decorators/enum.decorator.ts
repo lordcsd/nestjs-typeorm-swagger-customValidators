@@ -51,7 +51,7 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
 
       if (invalidDefault.length) throwError(target);
     }
-    optional ? IsOptional()(target, key) : notEmptyFn(key)(target, key);
+    if (optional) IsOptional()(target, key);
     notEmptyFn(key)(target, key);
     isEnumFn(key, validEnum as object, isArray)(target, key);
     mySwaggerProp(target, key);

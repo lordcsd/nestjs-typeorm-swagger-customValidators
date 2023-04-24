@@ -29,13 +29,17 @@ export const isEnumFn = (
   customKey: string,
   validEnum: object,
   isArray = false
-) =>
-  IsEnum(validEnum, {
-    message: `${customKey}: Must be a list containing either ${Object.values(
-      validEnum
-    ).join(" and/or ")}`,
+) => {
+  const message = `
+  ${customKey}: Must be ${
+    isArray ? "a list containing" : "either"
+  } ${Object.values(validEnum).join(" and/or ")}`;
+
+  return IsEnum(validEnum, {
+    message,
     ...(isArray && { each: true }),
   });
+};
 
 export const isBooleanFn = (customKeys: any) =>
   IsBoolean({ message: `${customKeys}: Must be true or false` });
@@ -67,8 +71,8 @@ export const swaggerProp = (details: ICustomSwaggerOptions) => {
 
   let defaultValue = details.defaultValue;
 
-  if(typeof defaultValue == 'string'){
-    defaultValue = defaultValue.trim()
+  if (typeof defaultValue == "string") {
+    defaultValue = defaultValue.trim();
   }
 
   const types = {

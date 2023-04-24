@@ -17,6 +17,16 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
     isArray,
   });
 
+  const throwError = (target: any) => {
+    throw new Error(
+      `Enum with keys ${Object.keys(
+        validEnum
+      )} got invalid default value ${defaultValue} in ${
+        target.constructor.name
+      }`
+    );
+  };
+
   return function (target: any, key: string) {
     if (!validEnum) {
       console.log(target);
@@ -25,16 +35,22 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
       );
     }
 
-    if (defaultValue && !Object.values(validEnum).includes(defaultValue)) {
-      throw new Error(
-        `Enum with keys ${Object.keys(
-          validEnum
-        )} got invalid default value ${defaultValue} in ${
-          target.constructor.name
-        }`
-      );
+    if (
+      defaultValue &&
+      !isArray &&
+      !Object.values(validEnum).includes(defaultValue)
+    ) {
+      throwError(target);
     }
 
+    if (defaultValue && isArray && Array.isArray(defaultValue)) {
+      const allDefaultsValues = Object.values(defaultValue);
+      const invalidDefault = defaultValue.filter(
+        (value) => !allDefaultsValues.includes(value)
+      );
+
+      if (invalidDefault.length) throwError(target);
+    }
     optional ? IsOptional()(target, key) : notEmptyFn(key)(target, key);
     notEmptyFn(key)(target, key);
     isEnumFn(key, validEnum as object, isArray)(target, key);

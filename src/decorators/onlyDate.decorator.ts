@@ -5,6 +5,8 @@ import {
 } from "class-validator";
 import { ICustomOnlyDateStringOptions } from "../dto/customValidatorOptions.dto";
 import { notEmptyFn, swaggerProp } from "../utils/commonDecoratorFunctions";
+import { Transform } from "class-transformer";
+import { TransformDateStringToDateObject } from "../transformers/validatorTransformers";
 
 function IsOnlyDate(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
@@ -20,7 +22,10 @@ function IsOnlyDate(validationOptions?: ValidationOptions) {
       validator: {
         validate(value: any) {
           const regex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-          return typeof value === "string" && regex.test(value);
+          return (
+            (typeof value === "string" && regex.test(value)) ||
+            value instanceof Date
+          );
         },
       },
     });
@@ -41,6 +46,7 @@ export function CustomOnlyDateString(details: ICustomOnlyDateStringOptions) {
   return function (target: any, key: string) {
     optional ? IsOptional()(target, key) : notEmptyFn(key)(target, key);
     IsOnlyDate({ each: isArray })(target, key);
+    Transform(TransformDateStringToDateObject)(target, key);
     mySwaggerProp(target, key);
   };
 }

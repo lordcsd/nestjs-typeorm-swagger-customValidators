@@ -82,3 +82,11 @@ export const TransformSingleItemToArray = ({ value }) => {
   console.log({ value });
   return Array.isArray(value) ? value : [value];
 };
+
+export const TransformDateStringToDateObject = ({ value }) => {
+  const date = new Date(value);
+  if (typeof value === "string" && date) {
+    return date;
+  }
+  return value;
+};

@@ -14,15 +14,9 @@ export function CustomStringValidator(details: ICustomStringOptions) {
 
   const mySwaggerProp = swaggerProp({
     description,
-    defaultValue:
-      isUUID && isArray
-        ? [
-            "8ca80282-eb68-4a4c-b82a-572ad64ff9f9",
-            "8ca80282-eb68-4a4c-b82a-572ad64ff9f9",
-          ]
-        : isUUID && !isArray
-        ? "8ca80282-eb68-4a4c-b82a-572ad64ff9f9"
-        : defaultValue,
+    defaultValue: isUUID
+      ? "8ca80282-eb68-4a4c-b82a-572ad64ff9f9"
+      : defaultValue,
     optional,
     isArray,
   });

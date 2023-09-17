@@ -65,21 +65,12 @@ export const TransformStringToJSONArray = ({ value, key }) => {
 };
 
 export const TransformSortStringArray = ({ value }) => {
-  console.log(
-    "value from transformSort: ",
-    value,
-    " \n returns:",
-    Array.isArray(value) && value.length
-      ? value.sort((a, b) => a.localeCompare(b))
-      : value
-  );
   return Array.isArray(value) && value.length
     ? value.sort((a, b) => a.localeCompare(b))
     : value;
 };
 
 export const TransformSingleItemToArray = ({ value }) => {
-  console.log({ value });
   return Array.isArray(value) ? value : [value];
 };
 

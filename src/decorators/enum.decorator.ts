@@ -29,7 +29,6 @@ export function CustomEnumValidator(details: ICustomEnumValidatorOptions) {
 
   return function (target: any, key: string) {
     if (!validEnum) {
-      console.log(target);
       throw new Error(
         `Please provide a validEnum for ${target.constructor.name}}.${key}`
       );

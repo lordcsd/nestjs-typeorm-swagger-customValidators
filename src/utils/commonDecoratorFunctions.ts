@@ -85,7 +85,7 @@ export const swaggerProp = (details: ICustomSwaggerOptions) => {
   const options: ApiPropertyOptions = {
     description,
     ...(type && { type: types[type] }),
-    ...(isArray && { isArray }),
+    // ...(isArray && { isArray }),
     ...(validEnum && { enum: validEnum }),
     ...(defaultValue && { default: defaultValue }),
   };

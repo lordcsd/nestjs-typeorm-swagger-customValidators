@@ -16,8 +16,11 @@ import { ICustomSwaggerOptions } from "../dto/customValidatorOptions.dto";
 
 const each = true;
 
-export const notEmptyFn = (customKeys: string) =>
-  IsNotEmpty({ message: `${customKeys}: Must not be empty` });
+export const notEmptyFn = (customKeys: string, isArray?: boolean) =>
+  IsNotEmpty({
+    message: `${customKeys}: Must not be empty`,
+    ...(isArray && { each: true }),
+  });
 
 export const isStringFn = (customKeys: string, isArray = false) =>
   IsString({
@@ -80,13 +83,14 @@ export const swaggerProp = (details: ICustomSwaggerOptions) => {
     string: String,
     number: Number,
     array: Array,
+    media: "string",
   };
 
   const options: ApiPropertyOptions = {
     description,
     ...(format && { format }),
     ...(type && { type: types[type] }),
-    // ...(isArray && { isArray }),
+    ...(isArray && { isArray }),
     ...(validEnum && { enum: validEnum }),
     ...(defaultValue && { default: defaultValue }),
   };

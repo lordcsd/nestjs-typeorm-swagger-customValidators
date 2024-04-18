@@ -1,11 +1,18 @@
-import { IsOptional, ValidateIf } from "class-validator";
-import { ICustomMediaValidationOptions } from "dto/customValidatorOptions.dto";
+import { IsNotEmpty, IsOptional, ValidateIf } from "class-validator";
 import { HasMimeType, IsFile, MaxFileSize } from "nestjs-form-data";
-import { swaggerProp } from "utils/commonDecoratorFunctions";
+import { notEmptyFn, swaggerProp } from "../utils/commonDecoratorFunctions";
+import { ICustomMediaValidationOptions } from "../dto/customValidatorOptions.dto";
+import { UnprocessableEntityException } from "@nestjs/common";
 
 export function CustomMediaValidator(details: ICustomMediaValidationOptions) {
-  const { maxSize, mimetypes, isArray, optional, defaultValue, description } =
-    details;
+  const {
+    maxSizeInByte,
+    mimetypes,
+    isArray,
+    optional,
+    defaultValue,
+    description,
+  } = details;
 
   const mySwaggerProp = swaggerProp({
     optional,
@@ -13,16 +20,36 @@ export function CustomMediaValidator(details: ICustomMediaValidationOptions) {
     defaultValue,
     isArray,
     format: "binary",
+    type: "media",
   });
 
   return function (target: any, key: string) {
-    ValidateIf((obj, media) => obj[media])(target, key);
-    if (optional) IsOptional()(target, key);
-    IsFile({ ...(isArray && { each: true }) })(target, key);
+    if (optional) {
+      IsOptional()(target, key);
+    }
 
-    MaxFileSize(maxSize, { ...(isArray && { each: true }) })(target, key);
+    if (mimetypes.length == 0) {
+      throw new UnprocessableEntityException(
+        `${key}: Please provide at least one mimetype`
+      );
+    }
 
-    HasMimeType(mimetypes, { ...(isArray && { each: true }) })(target, key);
+    IsFile({
+      ...(isArray && { each: true }),
+      message: `${key}: Must be a file`,
+    })(target, key);
+
+    notEmptyFn(key, isArray)(target, key);
+
+    MaxFileSize(maxSizeInByte, {
+      ...(isArray && { each: true }),
+      message: `${key}: cannot exceed ${(maxSizeInByte) / 1e6} megabytes`,
+    })(target, key);
+
+    HasMimeType(mimetypes, {
+      ...(isArray && { each: true }),
+      message: `${key}: must have mimetype ${mimetypes.join(" or ")}`,
+    })(target, key);
     mySwaggerProp(target, key);
   };
 }

@@ -1,7 +1,7 @@
 class IDefaultValdationOptions {
-  optional? = false;
+  optional?: boolean = false;
   defaultValue?: any;
-  description? = "";
+  description?: string = "";
 }
 
 class IBaseValidationOptions extends IDefaultValdationOptions {
@@ -11,8 +11,8 @@ class IBaseValidationOptions extends IDefaultValdationOptions {
 export class ICustomOnlyDateStringOptions extends IBaseValidationOptions {}
 
 export class ICustomSwaggerOptions extends IBaseValidationOptions {
-  type?: "boolean" | "number" | "string" | "array";
-  format?: 'binary'
+  type?: "boolean" | "number" | "string" | "array" | "media";
+  format?: "binary";
   validEnum?: Object;
 }
 
@@ -54,7 +54,7 @@ export enum MimeTypeEnum {
   DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 }
 export class ICustomMediaValidationOptions extends IBaseValidationOptions {
-  maxSize?: number = 1e10;
-  mimetypes?: MimeTypeEnum[] = [];
+  maxSizeInByte?: number = 1e10;
+  mimetypes: MimeTypeEnum[] = [];
   isArray?: boolean = false;
 }

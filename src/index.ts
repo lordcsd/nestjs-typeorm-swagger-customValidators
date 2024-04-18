@@ -6,3 +6,4 @@ export * from './decorators/password.decorator';
 export * from './decorators/string.decorator';
 export * from './decorators/time.decorator';
 export * from './decorators/onlyDate.decorator';
+export * from './decorators/media.decorator';

@@ -67,7 +67,7 @@ export const isArrayFn = (customKey: string) =>
   IsArray({ message: `${customKey}: Must be array` });
 
 export const swaggerProp = (details: ICustomSwaggerOptions) => {
-  const { description, validEnum, optional, isArray, type } = details;
+  const { description, validEnum, optional, isArray, type, format } = details;
 
   let defaultValue = details.defaultValue;
 
@@ -84,6 +84,7 @@ export const swaggerProp = (details: ICustomSwaggerOptions) => {
 
   const options: ApiPropertyOptions = {
     description,
+    ...(format && { format }),
     ...(type && { type: types[type] }),
     // ...(isArray && { isArray }),
     ...(validEnum && { enum: validEnum }),

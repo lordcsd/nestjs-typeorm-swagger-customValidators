@@ -36,7 +36,7 @@ export const isEnumFn = (
   const message = `
   ${customKey}: Must be ${
     isArray ? "a list containing" : "either"
-  } ${Object.values(validEnum).join(" and/or ")}`;
+  } ${Object.values(validEnum).join(" or ")}`;
 
   return IsEnum(validEnum, {
     message,

@@ -45,14 +45,33 @@ export enum MimeTypeEnum {
   PNG = "image/png",
   JFIF = "image/jfif",
   GIF = "image/gif",
+  WEBP = "image/webp",
+
   MP4 = "video/mp4",
   "3GP" = "video/3gpp",
   WEBM = "video/webm",
+
   PDF = "application/pdf",
   MS_DOC = "application/x-cfb",
   MS_WORD = "application/msword", //.DOC
   DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 }
+
+export const ImageMimetypes: MimeTypeEnum[] = [
+  MimeTypeEnum.JPEG,
+  MimeTypeEnum.JPG,
+  MimeTypeEnum.PNG,
+  MimeTypeEnum.JFIF,
+  MimeTypeEnum.GIF,
+  MimeTypeEnum.WEBP,
+];
+
+export const VideoMimetypes: MimeTypeEnum[] = [
+  MimeTypeEnum.MP4,
+  MimeTypeEnum["3GP"],
+  MimeTypeEnum.WEBM,
+];
+
 export class ICustomMediaValidationOptions extends IBaseValidationOptions {
   maxSizeInByte?: number = 1e10;
   mimetypes: MimeTypeEnum[] = [];

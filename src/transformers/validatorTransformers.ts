@@ -7,7 +7,8 @@ export const TransformBooleanStringToBoolean = (params: TransformFnParams) => {
     return value;
   }
   if (value && typeof value == "string") {
-    return value.trim().toLocaleLowerCase() === "true";
+    if(value.trim().toLocaleLowerCase() === "true") return true
+    if(value.trim().toLocaleLowerCase() === "false") return false
   }
   return null;
 };
